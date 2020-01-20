@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_app/Models/item.dart';
-import 'package:flutter_app/Views/login.dart';
+import 'package:flutter_app/Views/login_Example.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepOrange,
       ),
-      home: LoginPage(),
+      home: LoginPageExemple(),
     );
   }
 }
