@@ -74,10 +74,12 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
   assets:
-    - assets/logo.png
+    - assets/logo.png 
     - assets/bone.png
     - assets/fb-icon.png
     - assets/reset-password-icon.png
     - assets/profile-picture.png
     - assets/user-picture.png
     - assets/app-logo.png
+    - assets/pop-corn.png
+    - assets/logo-busca-cine.png

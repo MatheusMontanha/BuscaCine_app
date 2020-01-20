@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-resetPasswordPage(){
+resetPasswordPage() {}
 
-}
 class LoginPageExemple extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class LoginPageExemple extends StatelessWidget {
           top: 60,
           left: 40,
           right: 40,
-          ),
+        ),
         color: Colors.white,
         child: ListView(
           children: <Widget>[
@@ -35,8 +34,7 @@ class LoginPageExemple extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-              style: TextStyle(
-                fontSize: 20),
+              style: TextStyle(fontSize: 20),
             ),
             SizedBox(
               height: 20,
@@ -60,7 +58,7 @@ class LoginPageExemple extends StatelessWidget {
                 child: Text(
                   "Recuperar Senha",
                 ),
-                onPressed: (){
+                onPressed: () {
                   // Navigator.push(
                   //   context,
                   //   MaterialPageRoute(builder: (context) => resetPasswordPage(),
@@ -77,44 +75,46 @@ class LoginPageExemple extends StatelessWidget {
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  stops: [0.3, 1],
-                  colors: [
-                    Color(0xFFF58524),
-                    Color(0XFFF92B7F),
-                  ]
-                ),
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    stops: [
+                      0.3,
+                      1
+                    ],
+                    colors: [
+                      Color(0xFFF58524),
+                      Color(0XFFF92B7F),
+                    ]),
                 borderRadius: BorderRadius.all(
                   Radius.circular(5),
                 ),
               ),
-             child: SizedBox.expand(
-               child: FlatButton(
-                 child: Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                   children: <Widget>[
-                     Text(
-                       "Login",
-                       style: TextStyle(
-                         fontWeight: FontWeight.bold,
-                         color: Colors.white,
-                         fontSize: 22,
-                       ),
-                       textAlign: TextAlign.left,
-                     ),
-                     Container(
-                       child: SizedBox(
-                         child: Image.asset("assets/bone.png"),
-                         height: 28,
-                         width: 28,
-                       ),
-                     ),
-                   ],
-                 ),
-                 onPressed: (){},
-               ),
-             ), 
+              child: SizedBox.expand(
+                child: FlatButton(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Login",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 22,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      Container(
+                        child: SizedBox(
+                          child: Image.asset("assets/bone.png"),
+                          height: 28,
+                          width: 28,
+                        ),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {},
+                ),
+              ),
             ),
             SizedBox(
               height: 10,
@@ -133,11 +133,12 @@ class LoginPageExemple extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text("Login com Facebook",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 20,
+                      Text(
+                        "Login com Facebook",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 20,
                         ),
                         textAlign: TextAlign.left,
                       ),
@@ -150,7 +151,7 @@ class LoginPageExemple extends StatelessWidget {
                       ),
                     ],
                   ),
-                  onPressed: (){},
+                  onPressed: () {},
                 ),
               ),
             ),
@@ -167,7 +168,7 @@ class LoginPageExemple extends StatelessWidget {
                     decoration: TextDecoration.underline,
                   ),
                 ),
-                onPressed: (){},
+                onPressed: () {},
               ),
             ),
           ],
