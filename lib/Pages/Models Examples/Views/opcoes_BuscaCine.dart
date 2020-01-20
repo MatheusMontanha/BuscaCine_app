@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class consultaCinema extends StatelessWidget {
+class opcoesBuscaCine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class consultaCinema extends StatelessWidget {
               height: 60,
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                color: Color(0xFF3C5A99),
                 borderRadius: BorderRadius.all(
                   Radius.circular(5),
                 ),
@@ -65,7 +65,7 @@ class consultaCinema extends StatelessWidget {
               height: 60,
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                color: Color(0xFF3C5A99),
                 borderRadius: BorderRadius.all(
                   Radius.circular(5),
                 ),
@@ -105,7 +105,7 @@ class consultaCinema extends StatelessWidget {
               height: 60,
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                color: Color(0xFF3C5A99),
                 borderRadius: BorderRadius.all(
                   Radius.circular(5),
                 ),
@@ -126,7 +126,7 @@ class consultaCinema extends StatelessWidget {
                       Container(
                         child: SizedBox(
                           child: Icon(
-                            Icons.movie_filter,
+                            Icons.live_tv,
                             color: Colors.white,
                             size: 35,
                           ),
@@ -138,24 +138,14 @@ class consultaCinema extends StatelessWidget {
                 ),
               ),
             ),
-            // Container(
-            //   height: 60,
-            //   child: Image.asset(
-            //     "assets/logo-busca-cine.png",
-            //   ),
-            //   alignment: Alignment.center,
-            // ),
+            Container(
+              height: 80,
+              child: Image.asset(
+                "assets/logo-busca-cine.png",
+              ),
+              alignment: Alignment.center,
+            ),
           ],
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 60,
-          color: Colors.blueGrey,
-          child: Image.asset(
-            "assets/logo-busca-cine.png",
-          ),
-          alignment: Alignment.centerLeft,
         ),
       ),
     );
