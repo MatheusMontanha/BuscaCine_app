@@ -8,7 +8,7 @@ class BuscaCinemas extends StatelessWidget {
   Future<List<PostModel>> _getCinemas() async {
     List<PostModel> cinemas = [];
     var response = await dio.get(
-        "https://api-content.ingresso.com/v0/theaters/city/5?partnership=buscacine");
+        "https://api-content.ingresso.com/v0/theaters/city/461?partnership=buscacine");
     var jsonData = (response.data as List)
         .map((item) => PostModel.fromJson(item))
         .toList();
@@ -19,7 +19,8 @@ class BuscaCinemas extends StatelessWidget {
           neighborhood: i.neighborhood,
           addressComplement: i.addressComplement,
           number: i.number,
-          cityId: i.cityId);
+          cityId: i.cityId,
+          images: i.images);
       cinemas.add(postModel);
     }
     return cinemas;
@@ -30,7 +31,25 @@ class BuscaCinemas extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       appBar: AppBar(
-        title: Text("Busque por cinemas."),
+        title: TextField(
+          keyboardType: TextInputType.text,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+          decoration: InputDecoration(
+              labelText: "Digite o nome da cidade...",
+              labelStyle: TextStyle(
+                color: Colors.white,
+              )),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Container(
         child: FutureBuilder<List<PostModel>>(
@@ -59,6 +78,11 @@ class BuscaCinemas extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           ListTile(
+                            leading: CircleAvatar(
+                              radius: 30,
+                              backgroundImage: NetworkImage(
+                                  snapshot.data[index].images[0].url),
+                            ),
                             title: Text(
                               snapshot.data[index].name,
                               style: TextStyle(fontSize: 18),
