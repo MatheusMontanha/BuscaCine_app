@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/Models/post_model.dart';
@@ -7,7 +5,7 @@ import 'package:flutter_app/src/Models/post_model.dart';
 class BuscaCinemas extends StatelessWidget {
   Dio dio = new Dio();
 
-  Future<List<PostModel>> _getUsers() async {
+  Future<List<PostModel>> _getCinemas() async {
     List<PostModel> cinemas = [];
     var response = await dio.get(
         "https://api-content.ingresso.com/v0/theaters/city/5?partnership=buscacine");
@@ -20,7 +18,9 @@ class BuscaCinemas extends StatelessWidget {
           address: i.address,
           neighborhood: i.neighborhood,
           addressComplement: i.addressComplement,
-          number: i.number);
+          number: i.number,
+          cityId: i.cityId,
+          images: i.images);
       cinemas.add(postModel);
     }
     return cinemas;
@@ -35,20 +35,46 @@ class BuscaCinemas extends StatelessWidget {
       ),
       body: Container(
         child: FutureBuilder<List<PostModel>>(
-          future: _getUsers(),
+          future: _getCinemas(),
           builder: (context, snapshot) {
             if (snapshot.data == null) {
               return Container(
                 child: Center(
-                  child: Text("Loading..."),
+                  child: Text(
+                    "Carregando...",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               );
             } else {
               return ListView.builder(
                 itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    title: Text(snapshot.data[index].name),
+                  return Center(
+                    child: Card(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            title: Text(
+                              snapshot.data[index].name,
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            subtitle: Text(
+                              "Endereço: ${snapshot.data[index].address}, Número: ${snapshot.data[index].number}",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.lightBlue),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   );
                 },
               );
@@ -56,66 +82,6 @@ class BuscaCinemas extends StatelessWidget {
           },
         ),
       ),
-
-      //     Container(
-      //   child: Column(
-      //     children: <Widget>[
-      //       TextFormField(
-      //         keyboardType: TextInputType.text,
-      //         decoration: InputDecoration(
-      //           prefixIcon: Icon(Icons.search),
-      //           labelText: "Nome da Cidade",
-      //           labelStyle: TextStyle(
-      //             color: Colors.black38,
-      //             fontWeight: FontWeight.w400,
-      //             fontSize: 20,
-      //           ),
-      //         ),
-      //         style: TextStyle(fontSize: 20),
-      //       ),
-      //       Container(
-      //         height: 40,
-      //         alignment: Alignment.center,
-      //         decoration: BoxDecoration(
-      //           color: Colors.blue,
-      //           borderRadius: BorderRadius.all(
-      //             Radius.circular(5),
-      //           ),
-      //         ),
-      //         child: FlatButton(
-      //           child: Text(
-      //             "Pesquisar",
-      //             style: TextStyle(
-      //               fontWeight: FontWeight.bold,
-      //               color: Colors.white,
-      //             ),
-      //           ),
-      //           onPressed: () {},
-      //         ),
-      //       ),
-      //       FutureBuilder(
-      //           future: _getUsers(),
-      //           builder: (context, snapshot) {
-      //             if (snapshot.data == null) {
-      //               return Container(
-      //                 child: Center(
-      //                   child: Text("Loading..."),
-      //                 ),
-      //               );
-      //             } else {
-      //               return ListView.builder(
-      //                 itemCount: snapshot.data.length,
-      //                 itemBuilder: (BuildContext context, int index) {
-      //                   return ListTile(
-      //                     title: Text(snapshot.data[index].name),
-      //                   );
-      //                 },
-      //               );
-      //             }
-      //           }),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
