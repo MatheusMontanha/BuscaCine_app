@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class opcoesBuscaCine extends StatelessWidget {
+class OpcoesBuscaCine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

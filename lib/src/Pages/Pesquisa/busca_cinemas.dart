@@ -19,8 +19,7 @@ class BuscaCinemas extends StatelessWidget {
           neighborhood: i.neighborhood,
           addressComplement: i.addressComplement,
           number: i.number,
-          cityId: i.cityId,
-          images: i.images);
+          cityId: i.cityId);
       cinemas.add(postModel);
     }
     return cinemas;
