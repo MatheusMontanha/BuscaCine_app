@@ -1,14 +1,26 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/Models/post_cidade.dart';
 import 'package:flutter_app/src/Models/post_model.dart';
+import 'package:http/http.dart';
 
 class BuscaCinemas extends StatefulWidget {
   Dio dio = new Dio();
-  List<PostModel> cinemas = [];
-  List<PostModel> cinemasPorCidade = [];
+  List<PostModel> cinemasPorCidade;
+
+  BuscaCinemas() {
+    cinemasPorCidade = [];
+  }
   Future<List<PostModel>> _getCinemas(String nomeCidade) async {
     int id;
+    var dadosCidade = await dio.get(
+        "https://api-content.ingresso.com/v0/states/city/name/$nomeCidade");
+    var cidade = Cidade.fromJson(dadosCidade.data);
+
+    id = int.parse(cidade.id);
+
     var response = await dio.get(
         "https://api-content.ingresso.com/v0/theaters/city/$id?partnership=buscacine");
     var jsonData = (response.data as List)
@@ -67,37 +79,56 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: widget.cinemasPorCidade.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Center(
-            child: Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      backgroundImage: NetworkImage(
-                          widget.cinemasPorCidade[index].images[0].url),
-                    ),
-                    title: Text(
-                      widget.cinemasPorCidade[index].name,
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    subtitle: Text(
-                      "Endereço: ${widget.cinemasPorCidade[index].address}, Número: ${widget.cinemasPorCidade[index].number}",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.lightBlue),
-                    ),
+      body: Container(
+        child: ListView.builder(
+          itemCount: widget.cinemasPorCidade.length,
+          itemBuilder: (BuildContext context, int index) {
+            if (widget.cinemasPorCidade.length == 0) {
+              return Center(
+                child: Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ListTile(
+                        leading: CircleAvatar(
+                          radius: 30,
+                          child: Text("Nenhum cinema foi Encontrado :(."),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
+              );
+            }
+            return Center(
+              child: Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        backgroundImage: NetworkImage(
+                            widget.cinemasPorCidade[index].images[0].url),
+                      ),
+                      title: Text(
+                        widget.cinemasPorCidade[index].name,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      subtitle: Text(
+                        "Bairro: ${widget.cinemasPorCidade[index].neighborhood}, Rua: ${widget.cinemasPorCidade[index].address}, Número: ${widget.cinemasPorCidade[index].number}",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightBlue),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
