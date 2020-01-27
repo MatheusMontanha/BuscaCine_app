@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'src/Pages/Home/opcoes_BuscaCine.dart';
+import 'package:flutter_app/src/Pages/Home/login_Example.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: OpcoesBuscaCine(),
+      home: LoginPageExemple(),
     );
   }
 }

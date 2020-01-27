@@ -1,55 +1,63 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/Models/post_cidade.dart';
 import 'package:flutter_app/src/Models/post_model.dart';
-import 'package:http/http.dart';
 
 class BuscaCinemas extends StatefulWidget {
-  Dio dio = new Dio();
-  List<PostModel> cinemasPorCidade;
-
-  BuscaCinemas() {
-    cinemasPorCidade = [];
-  }
-  Future<List<PostModel>> _getCinemas(String nomeCidade) async {
-    int id;
-    var dadosCidade = await dio.get(
-        "https://api-content.ingresso.com/v0/states/city/name/$nomeCidade");
-    var cidade = Cidade.fromJson(dadosCidade.data);
-
-    id = int.parse(cidade.id);
-
-    var response = await dio.get(
-        "https://api-content.ingresso.com/v0/theaters/city/$id?partnership=buscacine");
-    var jsonData = (response.data as List)
-        .map((item) => PostModel.fromJson(item))
-        .toList();
-    for (var i in jsonData) {
-      PostModel postModel = PostModel(
-          name: i.name,
-          address: i.address,
-          neighborhood: i.neighborhood,
-          addressComplement: i.addressComplement,
-          number: i.number,
-          cityId: i.cityId,
-          images: i.images);
-      cinemasPorCidade.add(postModel);
-    }
-    return cinemasPorCidade;
-  }
-
   @override
   _BuscaCinemasState createState() => _BuscaCinemasState();
 }
 
 class _BuscaCinemasState extends State<BuscaCinemas> {
+  Dio dio = new Dio();
+  List<PostModel> cinemasPorCidade = [];
+  Future<List<PostModel>> _getCinemas(String nomeCidade) async {
+    int id;
+    try {
+      var dadosCidade = await dio.get(
+          "https://api-content.ingresso.com/v0/states/city/name/$nomeCidade");
+
+      var cidade = Cidade.fromJson(dadosCidade.data);
+      id = int.parse(cidade.id);
+      var response = await dio.get(
+          "https://api-content.ingresso.com/v0/theaters/city/$id?partnership=buscacine");
+      var jsonData = (response.data as List)
+          .map((item) => PostModel.fromJson(item))
+          .toList();
+      for (var i in jsonData) {
+        PostModel postModel = PostModel(
+            name: i.name,
+            address: i.address,
+            neighborhood: i.neighborhood,
+            addressComplement: i.addressComplement,
+            number: i.number,
+            cityId: i.cityId,
+            images: i.images);
+        cinemasPorCidade.add(postModel);
+      }
+      return cinemasPorCidade;
+    } catch (e) {
+      if (cinemasPorCidade.length == 0) {
+        PostModel postModel = PostModel(
+            name: "null",
+            address: "null",
+            neighborhood: "null",
+            addressComplement: "null",
+            number: "null",
+            cityId: "null",
+            images: null);
+        cinemasPorCidade.add(postModel);
+      }
+      return cinemasPorCidade;
+    }
+  }
+
   var newTaskCtrl = TextEditingController();
 
   void atualizarLista() {
     setState(() {
-      widget._getCinemas(newTaskCtrl.text);
+      _getCinemas(newTaskCtrl.text);
+      newTaskCtrl.text = "";
     });
   }
 
@@ -81,18 +89,29 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
       ),
       body: Container(
         child: ListView.builder(
-          itemCount: widget.cinemasPorCidade.length,
+          itemCount: cinemasPorCidade.length,
           itemBuilder: (BuildContext context, int index) {
-            if (widget.cinemasPorCidade.length == 0) {
+            if (cinemasPorCidade[0].name.contains("null")) {
               return Center(
                 child: Card(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       ListTile(
-                        leading: CircleAvatar(
-                          radius: 30,
-                          child: Text("Nenhum cinema foi Encontrado :(."),
+                        title: Text(
+                          "Nenhum cinema foi Encontrado :(.",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "Verifique se o nome da cidade foi preenchido corretamente.",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ],
@@ -108,15 +127,15 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
                     ListTile(
                       leading: CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage(
-                            widget.cinemasPorCidade[index].images[0].url),
+                        backgroundImage:
+                            NetworkImage(cinemasPorCidade[index].images[0].url),
                       ),
                       title: Text(
-                        widget.cinemasPorCidade[index].name,
+                        cinemasPorCidade[index].name,
                         style: TextStyle(fontSize: 18),
                       ),
                       subtitle: Text(
-                        "Bairro: ${widget.cinemasPorCidade[index].neighborhood}, Rua: ${widget.cinemasPorCidade[index].address}, Número: ${widget.cinemasPorCidade[index].number}",
+                        "Bairro: ${cinemasPorCidade[index].neighborhood}, ${cinemasPorCidade[index].address}, Número: ${cinemasPorCidade[index].number}",
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
