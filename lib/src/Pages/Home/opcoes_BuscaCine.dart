@@ -1,7 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/src/Pages/Home/login_Example.dart';
 import 'package:flutter_app/src/Pages/Pesquisa/busca_cinemas.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class OpcoesBuscaCine extends StatelessWidget {
+class OpcoesBuscaCine extends StatefulWidget {
+  @override
+  _OpcoesBuscaCineState createState() => _OpcoesBuscaCineState();
+}
+
+class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
+  SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+
+  checkLoginStatus() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getString("token") == null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (BuildContext context) => LoginPageExemple()),
+          (Route<dynamic> route) => false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,6 +39,20 @@ class OpcoesBuscaCine extends StatelessWidget {
         color: Colors.blueGrey,
         child: ListView(
           children: <Widget>[
+            FlatButton(
+              child: Text(
+                "Sair",
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                sharedPreferences.clear();
+                sharedPreferences.commit();
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LoginPageExemple()),
+                    (Route<dynamic> route) => false);
+              },
+            ),
             SizedBox(
               width: 128,
               height: 128,

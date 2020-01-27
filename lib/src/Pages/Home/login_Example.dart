@@ -17,28 +17,41 @@ class _LoginPageExempleState extends State<LoginPageExemple> {
   TextEditingController passwordController = TextEditingController();
 
   bool _isLoading = false;
+  bool _tentativa = false;
   Dio dio = Dio();
 
   signIn(String email, String password) async {
-    Map data = {'email': email, 'password': password};
+    email = "eve.holt@reqres";
+    password = "cityslicka";
+    var data = {'email': email, 'password': password};
 
     var jsonData;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var response;
+    try {
+      response = await dio.post("https://reqres.in/api/login", data: data);
 
-    var response = await dio.post("https://jsonplaceholder.typicode.com/posts",
-        data: data);
-    if (response.statusCode == 200) {
-      jsonData = json.decode(response.data);
-      setState(() {
-        _isLoading = false;
-        sharedPreferences.setString("token", jsonData['token']);
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-                builder: (BuildContext context) => OpcoesBuscaCine()),
-            ModalRoute.withName('/'));
-      });
-    } else {
-      print(response.data);
+      if (response.statusCode == 200) {
+        jsonData = json.decode(response.data);
+        setState(() {
+          _isLoading = false;
+          sharedPreferences.setString("token", jsonData['token']);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => OpcoesBuscaCine()));
+        });
+      } else {
+        print(response.data);
+      }
+    } catch (e) {
+      if (response == null) {
+        setState(() {
+          _isLoading = false;
+          _tentativa = true;
+          sharedPreferences.setString("token", null);
+        });
+      }
     }
   }
 
@@ -111,13 +124,7 @@ class _LoginPageExempleState extends State<LoginPageExemple> {
                           ),
                         ],
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => resetPasswordPage(),
-                        //   ),
-                        // );
-                      },
+                      onPressed: () {},
                     ),
                   ),
                   SizedBox(
