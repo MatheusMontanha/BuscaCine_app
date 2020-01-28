@@ -7,24 +7,12 @@ class DetalhesFilme extends StatelessWidget {
   DetalhesFilme(this.filme);
   @override
   Widget build(BuildContext context) {
-    final levelIndicator = Container(
-      child: Container(
-        child: LinearProgressIndicator(
-            backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-            //value: lesson.indicatorValue,
-            valueColor: AlwaysStoppedAnimation(Colors.green)),
-      ),
-    );
-
-    final coursePrice = Container(
+    final classificacao = Container(
       padding: const EdgeInsets.all(7.0),
       decoration: new BoxDecoration(
           border: new Border.all(color: Colors.white),
           borderRadius: BorderRadius.circular(5.0)),
-      child: new Text(
-        "\$",
-        style: TextStyle(color: Colors.white),
-      ),
+      child: Image.asset("assets/class_14_anos.png"),
     );
 
     final topContentText = Column(
@@ -40,16 +28,16 @@ class DetalhesFilme extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Expanded(flex: 1, child: levelIndicator),
             Expanded(
                 flex: 6,
                 child: Padding(
                     padding: EdgeInsets.only(left: 10.0),
                     child: Text(
-                      "AQuiioii",
-                      style: TextStyle(color: Colors.white),
+                      "Diretor: ${filme.director} \nDistribuição: ${filme.distributor}\nCidade: ${filme.city}",
+                      style: TextStyle(
+                          color: Colors.white70, fontWeight: FontWeight.bold),
                     ))),
-            Expanded(flex: 1, child: coursePrice)
+            Expanded(flex: 1, child: classificacao)
           ],
         ),
       ],
@@ -117,7 +105,7 @@ class DetalhesFilme extends StatelessWidget {
                 ),
                 Container(
                   child: SizedBox(
-                    child: Image.asset("assets/youtube.jpg"),
+                    child: Image.asset("assets/youtube.png"),
                     height: 28,
                     width: 28,
                   ),
@@ -132,14 +120,24 @@ class DetalhesFilme extends StatelessWidget {
       padding: EdgeInsets.all(40.0),
       child: Center(
         child: Column(
-          children: <Widget>[bottomContentText, readButton],
+          children: <Widget>[
+            Text(
+              "Sinopse",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            bottomContentText,
+            readButton,
+          ],
         ),
       ),
     );
 
     return Scaffold(
       body: Column(
-        children: <Widget>[topContent, bottomContent],
+        children: <Widget>[
+          topContent,
+          bottomContent,
+        ],
       ),
     );
   }
