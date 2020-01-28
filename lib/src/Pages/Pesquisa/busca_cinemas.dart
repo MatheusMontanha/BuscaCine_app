@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/src/Models/post_cidade.dart';
 import 'package:flutter_app/src/Models/post_model.dart';
+import 'package:flutter_app/src/app/Negocio/bloc_requests.dart';
 
 class BuscaCinemas extends StatefulWidget {
   @override
@@ -11,50 +11,14 @@ class BuscaCinemas extends StatefulWidget {
 class _BuscaCinemasState extends State<BuscaCinemas> {
   Dio dio = new Dio();
   List<PostModel> cinemasPorCidade = [];
-  Future<List<PostModel>> _getCinemas(String nomeCidade) async {
-    int id;
-    cinemasPorCidade = [];
-    try {
-      var dadosCidade = await dio.get(
-          "https://api-content.ingresso.com/v0/states/city/name/$nomeCidade");
+  BuscaCineRequisicoes bcRequisicoes = BuscaCineRequisicoes();
 
-      var cidade = Cidade.fromJson(dadosCidade.data);
-      id = int.parse(cidade.id);
-      var response = await dio.get(
-          "https://api-content.ingresso.com/v0/theaters/city/$id?partnership=buscacine");
-      var jsonData = (response.data as List)
-          .map((item) => PostModel.fromJson(item))
-          .toList();
-      for (var i in jsonData) {
-        PostModel postModel = PostModel(
-            name: i.name,
-            address: i.address,
-            neighborhood: i.neighborhood,
-            addressComplement: i.addressComplement,
-            number: i.number,
-            cityId: i.cityId,
-            images: i.images);
-        cinemasPorCidade.add(postModel);
-      }
-      setState(() {
-        return cinemasPorCidade;
-      });
-    } catch (e) {
-      if (cinemasPorCidade.length == 0) {
-        PostModel postModel = PostModel(
-            name: "null",
-            address: "null",
-            neighborhood: "null",
-            addressComplement: "null",
-            number: "null",
-            cityId: "null",
-            images: null);
-        cinemasPorCidade.add(postModel);
-      }
-      setState(() {
-        return cinemasPorCidade;
-      });
-    }
+  Future<List<PostModel>> _getCinemas(String nomeCidade) async {
+    int id = await bcRequisicoes.recuperaIDCidade(nomeCidade);
+    cinemasPorCidade = await bcRequisicoes.recuperaCinemas(id);
+    setState(() {
+      return cinemasPorCidade;
+    });
     return null;
   }
 
@@ -132,8 +96,7 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
                     ListTile(
                       leading: CircleAvatar(
                         radius: 30,
-                        backgroundImage:
-                            NetworkImage(cinemasPorCidade[index].images[0].url),
+                        child: Text("BC"),
                       ),
                       title: Text(
                         cinemasPorCidade[index].name,

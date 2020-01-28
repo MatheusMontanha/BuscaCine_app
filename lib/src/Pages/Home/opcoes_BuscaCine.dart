@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/Pages/Home/login_Example.dart';
 import 'package:flutter_app/src/Pages/Pesquisa/busca_cinemas.dart';
+import 'package:flutter_app/src/Pages/Pesquisa/busca_filmes_cartaz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OpcoesBuscaCine extends StatefulWidget {
@@ -70,7 +71,6 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
               ),
               onTap: () {
                 sharedPreferences.clear();
-                sharedPreferences.commit();
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                         builder: (BuildContext context) => LoginPageExemple()),
@@ -175,7 +175,13 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
                       ),
                     ],
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                BuscaFilmeCartaz()));
+                  },
                 ),
               ),
             ),
