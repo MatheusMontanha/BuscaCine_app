@@ -13,6 +13,7 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
   List<PostModel> cinemasPorCidade = [];
   Future<List<PostModel>> _getCinemas(String nomeCidade) async {
     int id;
+    cinemasPorCidade = [];
     try {
       var dadosCidade = await dio.get(
           "https://api-content.ingresso.com/v0/states/city/name/$nomeCidade");
@@ -35,7 +36,9 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
             images: i.images);
         cinemasPorCidade.add(postModel);
       }
-      return cinemasPorCidade;
+      setState(() {
+        return cinemasPorCidade;
+      });
     } catch (e) {
       if (cinemasPorCidade.length == 0) {
         PostModel postModel = PostModel(
@@ -48,8 +51,11 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
             images: null);
         cinemasPorCidade.add(postModel);
       }
-      return cinemasPorCidade;
+      setState(() {
+        return cinemasPorCidade;
+      });
     }
+    return null;
   }
 
   var newTaskCtrl = TextEditingController();
@@ -57,7 +63,6 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
   void atualizarLista() {
     setState(() {
       _getCinemas(newTaskCtrl.text);
-      newTaskCtrl.text = "";
     });
   }
 

@@ -30,6 +30,56 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Menu"),
+        backgroundColor: Colors.blueGrey,
+      ),
+      drawer: new Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text("Matheus Montanha"),
+              accountEmail: Text("matheusmontanhakk@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage:
+                    NetworkImage("https://i.pravatar.cc/150?img=3"),
+              ),
+            ),
+            ListTile(
+              title: Text(
+                "Minha conta",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            Divider(
+              color: Colors.black,
+              height: 2.0,
+              indent: 15,
+              endIndent: 70,
+            ),
+            ListTile(
+              title: Text(
+                "Sair",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 24,
+                ),
+              ),
+              onTap: () {
+                sharedPreferences.clear();
+                sharedPreferences.commit();
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LoginPageExemple()),
+                    (Route<dynamic> route) => false);
+              },
+            ),
+          ],
+        ),
+      ),
       body: Container(
         padding: EdgeInsets.only(
           top: 60,
@@ -39,20 +89,6 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
         color: Colors.blueGrey,
         child: ListView(
           children: <Widget>[
-            FlatButton(
-              child: Text(
-                "Sair",
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                sharedPreferences.clear();
-                sharedPreferences.commit();
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => LoginPageExemple()),
-                    (Route<dynamic> route) => false);
-              },
-            ),
             SizedBox(
               width: 128,
               height: 128,
