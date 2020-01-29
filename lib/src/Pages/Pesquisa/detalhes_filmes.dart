@@ -5,6 +5,32 @@ class DetalhesFilme extends StatelessWidget {
   final PostFilmeCartaz filme;
 
   DetalhesFilme(this.filme);
+
+  Image idenClassificacao(String classificacao) {
+    switch (classificacao) {
+      case "18 anos":
+        return Image.asset("assets/class-18-anos-logo.png");
+        break;
+      case "16 anos":
+        return Image.asset("assets/class-16-anos-logo.png");
+        break;
+      case "14 anos":
+        return Image.asset("assets/class_14_anos.png");
+        break;
+      case "12 anos":
+        return Image.asset("assets/class-12-anos-logo.png");
+        break;
+      case "10 anos":
+        return Image.asset("assets/class-10-anos-logo.png");
+        break;
+      case "Livre":
+        return Image.asset("assets/class-livre-logo.png");
+        break;
+      default:
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final classificacao = Container(
@@ -12,7 +38,7 @@ class DetalhesFilme extends StatelessWidget {
       decoration: new BoxDecoration(
           border: new Border.all(color: Colors.white),
           borderRadius: BorderRadius.circular(5.0)),
-      child: Image.asset("assets/class_14_anos.png"),
+      child: idenClassificacao(filme.contentRating),
     );
 
     final topContentText = Column(
@@ -22,7 +48,7 @@ class DetalhesFilme extends StatelessWidget {
         SizedBox(height: 10.0),
         Text(
           filme.title,
-          style: TextStyle(color: Colors.white, fontSize: 45.0),
+          style: TextStyle(color: Colors.white, fontSize: 35.0),
         ),
         SizedBox(height: 30.0),
         Row(
@@ -59,8 +85,12 @@ class DetalhesFilme extends StatelessWidget {
           padding: EdgeInsets.all(40.0),
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
-          child: Center(
-            child: topContentText,
+          child: ListView(
+            children: <Widget>[
+              Center(
+                child: topContentText,
+              )
+            ],
           ),
         ),
         Positioned(
@@ -123,7 +153,7 @@ class DetalhesFilme extends StatelessWidget {
           children: <Widget>[
             Text(
               "Sinopse",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             bottomContentText,
             readButton,
@@ -133,7 +163,7 @@ class DetalhesFilme extends StatelessWidget {
     );
 
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: <Widget>[
           topContent,
           bottomContent,

@@ -34,13 +34,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -78,14 +76,14 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
   assets:
-    - assets/logo.png 
-    - assets/bone.png
     - assets/fb-icon.png
     - assets/reset-password-icon.png
-    - assets/profile-picture.png
-    - assets/user-picture.png
-    - assets/app-logo.png
     - assets/pop-corn.png
     - assets/logo-busca-cine.png
     - assets/youtube.png
     - assets/class_14_anos.png
+    - assets/class-12-anos-logo.png
+    - assets/class-10-anos-logo.png
+    - assets/class-livre-logo.png
+    - assets/class-16-anos-logo.png
+    - assets/class-18-anos-logo.png
