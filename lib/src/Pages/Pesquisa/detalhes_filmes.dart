@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/Models/post_filmes_cartaz.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetalhesFilme extends StatelessWidget {
   final PostFilmeCartaz filme;
 
   DetalhesFilme(this.filme);
+
+  Future<void> _abrirAppURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: true,
+        forceWebView: false,
+        headers: <String, String>{'header_key': 'header_value'},
+      );
+    } else {
+      throw 'Não foi possível encontrar a URL';
+    }
+  }
 
   Image idenClassificacao(String classificacao) {
     switch (classificacao) {
@@ -44,11 +58,11 @@ class DetalhesFilme extends StatelessWidget {
     final topContentText = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 100.0),
+        SizedBox(height: 50.0),
         SizedBox(height: 10.0),
         Text(
           filme.title,
-          style: TextStyle(color: Colors.white, fontSize: 35.0),
+          style: TextStyle(color: Colors.white, fontSize: 30.0),
         ),
         SizedBox(height: 30.0),
         Row(
@@ -142,7 +156,9 @@ class DetalhesFilme extends StatelessWidget {
                 ),
               ],
             ),
-            onPressed: () {},
+            onPressed: () {
+              _abrirAppURL(filme.trailers[0].url);
+            },
           ),
         ));
     final bottomContent = Container(
