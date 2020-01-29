@@ -27,8 +27,16 @@ class _BuscaFilmeCartazState extends State<BuscaFilmeCartaz> {
 
   void buscarFilmesCartaz() {
     setState(() {
+      _estadoInicial = false;
       _getFilmesCartaz(newTaskCtrl.text);
     });
+  }
+
+  bool _estadoInicial;
+  @override
+  void initState() {
+    _estadoInicial = true;
+    super.initState();
   }
 
   @override
@@ -58,76 +66,85 @@ class _BuscaFilmeCartazState extends State<BuscaFilmeCartaz> {
         ],
         centerTitle: true,
       ),
-      body: Container(
-        child: ListView.builder(
-          itemCount: filmesEmCartaz.length,
-          itemBuilder: (BuildContext context, int index) {
-            if (filmesEmCartaz[0].id.contains("null") &&
-                filmesEmCartaz[0].title.contains("null")) {
-              return Center(
-                child: Card(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ListTile(
-                        title: Text(
-                          "Nenhum cinema foi Encontrado :(.",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+      body: _estadoInicial
+          ? Center(
+              child: Container(
+                  width: 100,
+                  height: 100,
+                  padding: const EdgeInsets.all(7.0),
+                  child: Image.asset("assets/cartaz-icon.png")),
+            )
+          : Container(
+              child: ListView.builder(
+                itemCount: filmesEmCartaz.length,
+                itemBuilder: (BuildContext context, int index) {
+                  if (filmesEmCartaz[0].id.contains("null") &&
+                      filmesEmCartaz[0].title.contains("null")) {
+                    return Center(
+                      child: Card(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            ListTile(
+                              title: Text(
+                                "Nenhum cinema foi Encontrado :(.",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Text(
+                                "Verifique se o nome da cidade foi preenchido corretamente.",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        subtitle: Text(
-                          "Verifique se o nome da cidade foi preenchido corretamente.",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
+                      ),
+                    );
+                  }
+                  return Center(
+                    child: Card(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            leading: CircleAvatar(
+                              radius: 30,
+                              backgroundImage: NetworkImage(
+                                  filmesEmCartaz[index].images[0].url),
+                            ),
+                            title: Text(
+                              filmesEmCartaz[index].title,
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            subtitle: Text(
+                              "Distribuidora: ${filmesEmCartaz[index].distributor}, Classificação ${filmesEmCartaz[index].contentRating}, Duração: ${filmesEmCartaz[index].duration}",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.lightBlue),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          DetalhesFilme(
+                                              filmesEmCartaz[index])));
+                            },
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              );
-            }
-            return Center(
-              child: Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: CircleAvatar(
-                        radius: 30,
-                        backgroundImage:
-                            NetworkImage(filmesEmCartaz[index].images[0].url),
-                      ),
-                      title: Text(
-                        filmesEmCartaz[index].title,
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      subtitle: Text(
-                        "Distribuidora: ${filmesEmCartaz[index].distributor}, Classificação ${filmesEmCartaz[index].contentRating}, Duração: ${filmesEmCartaz[index].duration}",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.lightBlue),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    DetalhesFilme(filmesEmCartaz[index])));
-                      },
                     ),
-                  ],
-                ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ),
+            ),
     );
   }
 }

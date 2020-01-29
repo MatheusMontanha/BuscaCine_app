@@ -2,12 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter_app/src/Models/post_cidade.dart';
 import 'package:flutter_app/src/Models/post_filmes_cartaz.dart';
 import 'package:flutter_app/src/Models/post_model.dart';
+import 'package:flutter_app/src/Models/post_sessoes_filme.dart';
 
 class BuscaCineRequisicoes {
   Dio dio = Dio();
   int id;
   List<PostModel> cinemasPorCidade;
   List<PostFilmeCartaz> cartazPorCidade;
+  List<PostSessaoFilme> sessoesPorCinema;
   Future<int> recuperaIDCidade(String nomeCidade) async {
     try {
       var dados = await dio.get(
@@ -36,7 +38,11 @@ class BuscaCineRequisicoes {
             addressComplement: i.addressComplement,
             number: i.number,
             cityId: i.cityId,
-            images: i.images);
+            images: i.images,
+            cityName: i.cityName,
+            enabled: i.enabled,
+            id: i.id,
+            totalRooms: i.totalRooms);
         cinemasPorCidade.add(postModel);
       }
 
@@ -95,5 +101,33 @@ class BuscaCineRequisicoes {
       }
       return cartazPorCidade;
     }
+  }
+
+  Future<List<PostSessaoFilme>> recuperaSessoesCinema(
+      int idCidade, int idCinema) async {
+    sessoesPorCinema = [];
+    try {
+      var response = await dio.get(
+          "https://api-content.ingresso.com/v0/sessions/city/$idCidade/theater/$idCinema?partnership=buscacine");
+      var jsonData = (response.data as List)
+          .map((item) => PostSessaoFilme.fromJson(item))
+          .toList();
+      for (var i in jsonData) {
+        PostSessaoFilme postFilmeCartaz = PostSessaoFilme(
+            movies: i.movies,
+            isToday: i.isToday,
+            date: i.date,
+            dateFormatted: i.dateFormatted,
+            dayOfWeek: i.dayOfWeek);
+        sessoesPorCinema.add(postFilmeCartaz);
+      }
+    } catch (e) {
+      if (sessoesPorCinema.length == 0) {
+        PostSessaoFilme postFilmeCartaz = PostSessaoFilme(movies: null);
+        sessoesPorCinema.add(postFilmeCartaz);
+        return sessoesPorCinema;
+      }
+    }
+    return sessoesPorCinema;
   }
 }

@@ -139,7 +139,7 @@ class DetalhesFilme extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  "Assista ao trailer",
+                  "Assista ao trailer no Youtube",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,

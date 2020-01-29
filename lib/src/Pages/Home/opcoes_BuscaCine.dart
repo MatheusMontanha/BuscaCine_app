@@ -28,12 +28,13 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
     }
   }
 
+  Color corPrimaria = Color.fromRGBO(58, 66, 86, 1.0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Menu"),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: corPrimaria,
       ),
       drawer: new Drawer(
         child: ListView(
@@ -86,7 +87,7 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
           left: 40,
           right: 40,
         ),
-        color: Colors.blueGrey,
+        color: corPrimaria,
         child: ListView(
           children: <Widget>[
             SizedBox(
