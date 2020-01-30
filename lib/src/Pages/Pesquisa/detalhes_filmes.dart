@@ -6,7 +6,6 @@ class DetalhesFilme extends StatelessWidget {
   final PostFilmeCartaz filme;
 
   DetalhesFilme(this.filme);
-
   Future<void> _abrirAppURL(String url) async {
     if (await canLaunch(url)) {
       await launch(
