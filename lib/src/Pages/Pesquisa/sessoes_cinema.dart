@@ -46,25 +46,25 @@ class _SessoesCinemaState extends State<SessoesCinema> {
   Color corPrimaria = Color.fromRGBO(58, 66, 86, 1.0);
   Color corCards = Color.fromRGBO(64, 75, 96, .9);
 
-  Image idenClassificacao(String classificacao) {
+  AssetImage idenClassificacao(String classificacao) {
     switch (classificacao) {
       case "18 anos":
-        return Image.asset("assets/class-18-anos-logo.png");
+        return AssetImage("assets/class-18-anos-logo.png");
         break;
       case "16 anos":
-        return Image.asset("assets/class-16-anos-logo.png");
+        return AssetImage("assets/class-16-anos-logo.png");
         break;
       case "14 anos":
-        return Image.asset("assets/class_14_anos.png");
+        return AssetImage("assets/class_14_anos.png");
         break;
       case "12 anos":
-        return Image.asset("assets/class-12-anos-logo.png");
+        return AssetImage("assets/class-12-anos-logo.png");
         break;
       case "10 anos":
-        return Image.asset("assets/class-10-anos-logo.png");
+        return AssetImage("assets/class-10-anos-logo.png");
         break;
       case "Livre":
-        return Image.asset("assets/class-livre-logo.png");
+        return AssetImage("assets/class-livre-logo.png");
         break;
       default:
     }
@@ -95,6 +95,12 @@ class _SessoesCinemaState extends State<SessoesCinema> {
                       child: Column(
                         children: <Widget>[
                           ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: idenClassificacao(
+                                  sessoesPorCinema[0]
+                                      .movies[index]
+                                      .contentRating),
+                            ),
                             title: Text(
                               sessoesPorCinema[0].movies[index].title,
                               style: TextStyle(
@@ -103,29 +109,6 @@ class _SessoesCinemaState extends State<SessoesCinema> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            subtitle: Text(
-                              "Faixa Etária: ${sessoesPorCinema[0].movies[index].contentRating}",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  padding: EdgeInsets.all(7.0),
-                                  child: Image.asset(
-                                      "assets/class-12-anos-logo.png"),
-                                ),
-                              ),
-                            ],
                           ),
                           Container(
                             decoration: BoxDecoration(

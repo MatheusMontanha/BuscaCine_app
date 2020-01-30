@@ -190,43 +190,6 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
               height: 40,
             ),
             Container(
-              height: 60,
-              alignment: Alignment.centerLeft,
-              decoration: BoxDecoration(
-                color: Color(0xFF3C5A99),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(5),
-                ),
-              ),
-              child: SizedBox.expand(
-                child: FlatButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Sessões de Cinema",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 17,
-                        ),
-                      ),
-                      Container(
-                        child: SizedBox(
-                          child: Icon(
-                            Icons.live_tv,
-                            color: Colors.white,
-                            size: 35,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-            ),
-            Container(
               height: 80,
               child: Image.asset(
                 "assets/logo-busca-cine.png",
