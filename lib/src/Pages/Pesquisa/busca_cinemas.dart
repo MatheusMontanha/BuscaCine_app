@@ -18,6 +18,7 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
     int id = await bcRequisicoes.recuperaIDCidade(nomeCidade);
     cinemasPorCidade = await bcRequisicoes.recuperaCinemas(id);
     setState(() {
+      _carregarLista = true;
       return cinemasPorCidade;
     });
     return null;
@@ -29,16 +30,18 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
     setState(() {
       _estadoInicial = false;
       _getCinemas(newTaskCtrl.text);
+      _carregarLista = false;
     });
   }
 
   bool _estadoInicial;
-
+  bool _carregarLista;
   Color corPrimaria = Color.fromRGBO(58, 66, 86, 1.0);
   Color corCards = Color.fromRGBO(64, 75, 96, .9);
   @override
   void initState() {
     _estadoInicial = true;
+    _carregarLista = false;
     super.initState();
   }
 
@@ -49,6 +52,7 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
       appBar: AppBar(
         backgroundColor: corPrimaria,
         title: TextField(
+          autofocus: true,
           controller: newTaskCtrl,
           keyboardType: TextInputType.text,
           style: TextStyle(
@@ -78,105 +82,110 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
                   child: Image.asset("assets/cinema-icon.png")),
             )
           : Container(
-              child: ListView.builder(
-                itemCount: cinemasPorCidade.length,
-                itemBuilder: (BuildContext context, int index) {
-                  if (cinemasPorCidade[0].name.contains("null")) {
-                    return Center(
-                      child: Card(
-                        color: corCards,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            ListTile(
-                              title: Text(
-                                "Nenhum cinema foi Encontrado :(.",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              subtitle: Text(
-                                "Verifique se o nome da cidade foi preenchido corretamente.",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }
-                  return Center(
-                    child: Card(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: corCards,
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            ListTile(
-                              leading: CircleAvatar(
-                                radius: 30,
-                                child: Text("BC"),
-                              ),
-                              title: Text(
-                                cinemasPorCidade[index].name,
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.white),
-                              ),
-                              subtitle: Text(
-                                "Bairro: ${cinemasPorCidade[index].neighborhood}, ${cinemasPorCidade[index].address}, Número: ${cinemasPorCidade[index].number}",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                opcoesCardCinema(
-                                    "Sessões",
-                                    Icon(
-                                      Icons.people,
-                                      color: Colors.black,
-                                      size: 30,
+              child: _carregarLista
+                  ? ListView.builder(
+                      itemCount: cinemasPorCidade.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (cinemasPorCidade[0].name.contains("null")) {
+                          return Center(
+                            child: Card(
+                              color: corCards,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  ListTile(
+                                    title: Text(
+                                      "Nenhum cinema foi Encontrado :(.",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                    1,
-                                    cinemasPorCidade[index]),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                opcoesCardCinema(
-                                    "Maps",
-                                    Icon(
-                                      Icons.map,
-                                      color: Colors.black,
-                                      size: 30,
+                                    subtitle: Text(
+                                      "Verifique se o nome da cidade foi preenchido corretamente.",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                    0,
-                                    null),
-                              ],
+                                  ),
+                                ],
+                              ),
                             ),
-                            SizedBox(
-                              height: 15,
-                            )
-                          ],
-                        ),
+                          );
+                        }
+                        return Center(
+                          child: Card(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: corCards,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  ListTile(
+                                    leading: CircleAvatar(
+                                      radius: 30,
+                                      child: Text("BC"),
+                                    ),
+                                    title: Text(
+                                      cinemasPorCidade[index].name,
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.white),
+                                    ),
+                                    subtitle: Text(
+                                      "Bairro: ${cinemasPorCidade[index].neighborhood}, ${cinemasPorCidade[index].address}, Número: ${cinemasPorCidade[index].number}",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      opcoesCardCinema(
+                                          "Sessões",
+                                          Icon(
+                                            Icons.people,
+                                            color: Colors.black,
+                                            size: 30,
+                                          ),
+                                          1,
+                                          cinemasPorCidade[index]),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      opcoesCardCinema(
+                                          "Maps",
+                                          Icon(
+                                            Icons.map,
+                                            color: Colors.black,
+                                            size: 30,
+                                          ),
+                                          0,
+                                          null),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    )
+                  : Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.white,
                       ),
-                    ),
-                  );
-                },
-              ),
-            ),
+                    )),
     );
   }
 
