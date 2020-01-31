@@ -16,12 +16,12 @@ class PasswordFieldValidator {
   }
 }
 
-class LoginPageExemple extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   @override
-  _LoginPageExempleState createState() => _LoginPageExempleState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageExempleState extends State<LoginPageExemple> {
+class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -29,8 +29,8 @@ class _LoginPageExempleState extends State<LoginPageExemple> {
   Dio dio = Dio();
 
   signIn(String email, String password) async {
-    //email = "eve.holt@reqres.in";
-    //password = "cityslicka";
+    email = "eve.holt@reqres.in";
+    password = "cityslicka";
     var data = {'email': email, 'password': password};
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -269,6 +269,10 @@ class _LoginPageExempleState extends State<LoginPageExemple> {
           "Email ou senha incorretos!",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        Icon(
+          Icons.error,
+          color: Colors.red,
+        )
       ]);
     } else {
       return new Row(

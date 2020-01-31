@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-class HomePage extends StatefulWidget {
+class MapsPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _MapsPageState createState() => _MapsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MapsPageState extends State<MapsPage> {
   Completer<GoogleMapController> _controller = Completer();
   Location location = Location();
   @override

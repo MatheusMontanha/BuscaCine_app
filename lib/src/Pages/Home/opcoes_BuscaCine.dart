@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/src/Pages/Home/login_Example.dart';
+import 'package:flutter_app/src/Pages/Home/login_page.dart';
 import 'package:flutter_app/src/Pages/Pesquisa/busca_cinemas.dart';
 import 'package:flutter_app/src/Pages/Pesquisa/busca_filmes_cartaz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,8 +22,7 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
     sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (BuildContext context) => LoginPageExemple()),
+          MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
           (Route<dynamic> route) => false);
     }
   }
@@ -74,7 +73,7 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
                 sharedPreferences.clear();
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
-                        builder: (BuildContext context) => LoginPageExemple()),
+                        builder: (BuildContext context) => LoginPage()),
                     (Route<dynamic> route) => false);
               },
             ),

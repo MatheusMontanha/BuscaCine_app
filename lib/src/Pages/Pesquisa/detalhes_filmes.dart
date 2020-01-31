@@ -4,7 +4,7 @@ import 'package:flutter_app/src/app/Negocio/bloc_usaveis.dart';
 
 class DetalhesFilme extends StatelessWidget {
   final PostFilmeCartaz filme;
-  Usaveis usaveis = Usaveis();
+  final Usaveis usaveis = Usaveis();
   DetalhesFilme(this.filme);
 
   Image idenClassificacao(String classificacao) {
