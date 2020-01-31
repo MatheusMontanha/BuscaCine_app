@@ -4,7 +4,17 @@ import 'package:flutter_app/src/Models/post_token.dart';
 import 'package:flutter_app/src/Pages/Home/opcoes_BuscaCine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-resetPasswordPage() {}
+class EmailFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty ? "O campo de email deve ser preenchido." : null;
+  }
+}
+
+class PasswordFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty ? "O campo de senha deve ser preenchido." : null;
+  }
+}
 
 class LoginPageExemple extends StatefulWidget {
   @override
@@ -19,8 +29,8 @@ class _LoginPageExempleState extends State<LoginPageExemple> {
   Dio dio = Dio();
 
   signIn(String email, String password) async {
-    email = "eve.holt@reqres.in";
-    password = "cityslicka";
+    //email = "eve.holt@reqres.in";
+    //password = "cityslicka";
     var data = {'email': email, 'password': password};
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -72,14 +82,9 @@ class _LoginPageExempleState extends State<LoginPageExemple> {
               ),
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
-                initialValue: "eve.holt@reqres.in",
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "O campo de email deve ser preenchido.";
-                  }
-                  return null;
-                },
-                //controller: emailController,
+                //initialValue: "eve.holt@reqres.in",
+                validator: EmailFieldValidator.validate,
+                controller: emailController,
                 decoration: InputDecoration(
                   labelText: "Email",
                   labelStyle: TextStyle(
@@ -95,15 +100,10 @@ class _LoginPageExempleState extends State<LoginPageExemple> {
               ),
               TextFormField(
                 keyboardType: TextInputType.text,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "O campo de senha deve ser preenchido.";
-                  }
-                  return null;
-                },
+                validator: PasswordFieldValidator.validate,
                 obscureText: true,
-                initialValue: "cityslicka",
-                //controller: passwordController,
+                //initialValue: "cityslicka",
+                controller: passwordController,
                 decoration: InputDecoration(
                   labelText: "Senha",
                   labelStyle: TextStyle(
