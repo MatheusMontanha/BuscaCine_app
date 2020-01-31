@@ -53,6 +53,8 @@ class _BuscaFilmeCartazState extends State<BuscaFilmeCartaz> {
       appBar: AppBar(
         backgroundColor: corPrimaria,
         title: TextField(
+          maxLength: 50,
+          maxLengthEnforced: true,
           autofocus: true,
           controller: newTaskCtrl,
           keyboardType: TextInputType.text,

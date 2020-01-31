@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/src/Models/post_token.dart';
 import 'package:flutter_app/src/Pages/Home/opcoes_BuscaCine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -82,6 +83,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
+                maxLength: 50,
+                maxLengthEnforced: true,
                 //initialValue: "eve.holt@reqres.in",
                 validator: EmailFieldValidator.validate,
                 controller: emailController,
@@ -99,6 +102,8 @@ class _LoginPageState extends State<LoginPage> {
                 height: 20,
               ),
               TextFormField(
+                maxLength: 10,
+                maxLengthEnforced: true,
                 keyboardType: TextInputType.text,
                 validator: PasswordFieldValidator.validate,
                 obscureText: true,
@@ -113,7 +118,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Divider(),
+              SizedBox(
+                height: 15,
+              ),
               Container(
                 height: 40,
                 child: FlatButton(
