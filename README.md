@@ -1,6 +1,5 @@
 # BuscaCine_App
 ## Visão Geral do Projeto
-Sistema de Gerenciamento de Funcionários desenvolvido com React, Spring Boot e MySQL. Contém as funcionalidades de cadastrar, atualizar e deletar um funcionário do sistema.
 Sistema de Busca de Cinemas em todo Brasil, desenvolvido com Flutter/Dart e API da Ingresso. Contém as funcionalidades de consultar cinemas de acordo com o nome da cidade, verificar sessões de determinado cinema e direcionamento para compra de ingressos e Consultar filmes em cartaz tambémd e acordo com a cidade desejada.
 
 ### Executando o Projeto
