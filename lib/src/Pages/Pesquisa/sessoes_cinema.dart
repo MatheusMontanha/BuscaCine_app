@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/src/Models/post_model.dart';
 import 'package:flutter_app/src/Models/post_sessoes_filme.dart';
 import 'package:flutter_app/src/app/Negocio/bloc_requests.dart';
+import 'package:flutter_app/src/app/Negocio/bloc_usaveis.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
 class SessoesCinema extends StatefulWidget {
@@ -22,7 +23,7 @@ class _SessoesCinemaState extends State<SessoesCinema> {
   var newTaskCtrl = TextEditingController();
 
   Dio dio = new Dio();
-
+  Usaveis usaveis = Usaveis();
   BuscaCineRequisicoes bcRequisicoes = BuscaCineRequisicoes();
 
   Future<List<PostSessaoFilme>> _getSessoesCinema() async {
@@ -199,6 +200,54 @@ class _SessoesCinemaState extends State<SessoesCinema> {
             style: TextStyle(
                 fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
           )));
+      listaDeSessoes.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              height: 50,
+              width: 235,
+              child: FlatButton(
+                color: Color(0xFF4F5E88),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      "Compre já seu ingresso",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Container(
+                      child: SizedBox(
+                        child: Icon(
+                          Icons.payment,
+                          color: Colors.black,
+                          size: 35,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                onPressed: () {
+                  usaveis.abrirAppURL(
+                      sessoesPorCinema[0]
+                          .movies[indexMovie]
+                          .rooms[indexRoom]
+                          .sessions[i]
+                          .siteURL,
+                      true,
+                      false);
+                },
+              ),
+            ),
+          ],
+        ),
+      );
     }
     return listaDeSessoes;
   }

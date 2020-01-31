@@ -1,23 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/Models/post_filmes_cartaz.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_app/src/app/Negocio/bloc_usaveis.dart';
 
 class DetalhesFilme extends StatelessWidget {
   final PostFilmeCartaz filme;
-
+  Usaveis usaveis = Usaveis();
   DetalhesFilme(this.filme);
-  Future<void> _abrirAppURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(
-        url,
-        forceSafariVC: true,
-        forceWebView: false,
-        headers: <String, String>{'header_key': 'header_value'},
-      );
-    } else {
-      throw 'Não foi possível encontrar a URL';
-    }
-  }
 
   Image idenClassificacao(String classificacao) {
     switch (classificacao) {
@@ -156,7 +144,7 @@ class DetalhesFilme extends StatelessWidget {
               ],
             ),
             onPressed: () {
-              _abrirAppURL(filme.trailers[0].url);
+              usaveis.abrirAppURL(filme.trailers[0].url, true, false);
             },
           ),
         ));
