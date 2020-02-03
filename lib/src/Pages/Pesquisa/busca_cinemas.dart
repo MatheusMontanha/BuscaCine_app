@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/Models/post_model.dart';
 import 'package:flutter_app/src/Pages/Pesquisa/sessoes_cinema.dart';
-import 'package:flutter_app/src/app/Negocio/bloc_requests.dart';
+import 'package:flutter_app/src/app/Negocio/requests.dart';
 
 class BuscaCinemas extends StatefulWidget {
   @override

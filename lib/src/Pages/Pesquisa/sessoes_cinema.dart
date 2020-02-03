@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/Models/post_model.dart';
 import 'package:flutter_app/src/Models/post_sessoes_filme.dart';
-import 'package:flutter_app/src/app/Negocio/bloc_requests.dart';
-import 'package:flutter_app/src/app/Negocio/bloc_usaveis.dart';
+import 'package:flutter_app/src/app/Negocio/requests.dart';
+import 'package:flutter_app/src/app/Negocio/comuns.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
 class SessoesCinema extends StatefulWidget {

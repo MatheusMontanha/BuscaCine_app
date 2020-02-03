@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/Models/post_filmes_cartaz.dart';
 import 'package:flutter_app/src/Pages/Pesquisa/detalhes_filmes.dart';
-import 'package:flutter_app/src/app/Negocio/bloc_requests.dart';
+import 'package:flutter_app/src/app/Negocio/requests.dart';
 
 class BuscaFilmeCartaz extends StatefulWidget {
   @override

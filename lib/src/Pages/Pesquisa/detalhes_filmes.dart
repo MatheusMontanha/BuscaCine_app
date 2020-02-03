@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/Models/post_filmes_cartaz.dart';
-import 'package:flutter_app/src/app/Negocio/bloc_usaveis.dart';
+import 'package:flutter_app/src/app/Negocio/comuns.dart';
 
 class DetalhesFilme extends StatelessWidget {
   final PostFilmeCartaz filme;
