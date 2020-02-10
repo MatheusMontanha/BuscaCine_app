@@ -19,11 +19,14 @@ environment:
 dependencies:
   dio: ^2.1.13
   rxdart: ^0.22.1+1
+  cached_network_image: ^2.0.0
   bloc_pattern: ^2.2.3
   http: ^0.12.0+4
   google_maps_flutter: ^0.5.21+15
   location: ^2.3.5
   cupertino_icons: ^0.1.3
+  firebase_auth: ^0.15.4
+  cloud_firestore: ^0.13.1+1
   url_launcher: ^5.4.1
   flare_flutter: ^2.0.1
   flutter:
@@ -95,3 +98,6 @@ flutter:
     - assets/WorldSpin.flr
     - assets/cartaz-icon.png
     - assets/cinema-icon.png
+    - assets/google-maps.png
+    - assets/ingresso.png
+    - assets/sessoes.png

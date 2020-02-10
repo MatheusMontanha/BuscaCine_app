@@ -127,7 +127,8 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
                                   ListTile(
                                     leading: CircleAvatar(
                                       radius: 30,
-                                      child: Text("BC"),
+                                      backgroundImage: NetworkImage(
+                                          "${cinemasPorCidade[index].images[0].url}"),
                                     ),
                                     title: Text(
                                       cinemasPorCidade[index].name,
@@ -150,25 +151,25 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
                                     children: <Widget>[
                                       opcoesCardCinema(
                                           "Sessões",
-                                          Icon(
-                                            Icons.people,
-                                            color: Colors.black,
-                                            size: 30,
+                                          Container(
+                                            child: Image.asset(
+                                                "assets/sessoes.png"),
                                           ),
                                           1,
-                                          cinemasPorCidade[index]),
+                                          cinemasPorCidade[index],
+                                          Color(0xFF6495ED)),
                                       SizedBox(
                                         width: 20,
                                       ),
                                       opcoesCardCinema(
-                                          "Maps",
-                                          Icon(
-                                            Icons.map,
-                                            color: Colors.black,
-                                            size: 30,
+                                          "Localização",
+                                          Container(
+                                            child: Image.asset(
+                                                "assets/google-maps.png"),
                                           ),
                                           0,
-                                          null),
+                                          null,
+                                          Color(0xFF3CB371)),
                                     ],
                                   ),
                                   SizedBox(
@@ -189,23 +190,13 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
     );
   }
 
-  Container opcoesCardCinema(
-      String tituloBotao, Icon icone, int numeroOpcao, PostModel cinema) {
+  Container opcoesCardCinema(String tituloBotao, Container icone,
+      int numeroOpcao, PostModel cinema, Color color) {
     return Container(
       height: 45,
-      width: 140,
+      width: 157,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [
-              0.3,
-              1
-            ],
-            colors: [
-              Color(0xFF5F9EA0),
-              Color(0xFF3C5A99),
-            ]),
+        color: color,
         borderRadius: BorderRadius.all(
           Radius.circular(4),
         ),
@@ -218,7 +209,7 @@ class _BuscaCinemasState extends State<BuscaCinemas> {
               tituloBotao,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Colors.white,
                 fontSize: 18,
               ),
             ),

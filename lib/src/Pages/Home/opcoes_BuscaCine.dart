@@ -39,6 +39,7 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
+              arrowColor: corPrimaria,
               accountName: Text("Matheus Montanha"),
               accountEmail: Text("matheusmontanhakk@gmail.com"),
               currentAccountPicture: CircleAvatar(

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "422960152827",
+    "firebase_url": "https://buscacine.firebaseio.com",
+    "project_id": "buscacine",
+    "storage_bucket": "buscacine.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422960152827:android:aaf1908d3f058db540705e",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422960152827-jivhel8f9fdah2g6j2q8go1sfi0jppij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFDkRDq2bXdODRDlZwsf4muqS9NDdVVkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422960152827-jivhel8f9fdah2g6j2q8go1sfi0jppij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
