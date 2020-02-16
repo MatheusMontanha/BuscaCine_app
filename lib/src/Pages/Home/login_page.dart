@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                 validator: EmailFieldValidator.validate,
                 controller: emailController,
                 decoration: InputDecoration(
-                  labelText: "Email",
+                  labelText: "Telefone ou E-mail",
                   labelStyle: TextStyle(
                     color: Colors.black38,
                     fontWeight: FontWeight.w400,

@@ -27,6 +27,38 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
     }
   }
 
+  alertDialogExit(BuildContext context) {
+    Widget cancelarButton = FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: Text("Cancelar"));
+    Widget continuarButton = FlatButton(
+        onPressed: () {
+          sharedPreferences.clear();
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
+              (Route<dynamic> route) => false);
+        },
+        child: Text("Continuar"));
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Alerta!"),
+      content: Text("Tem certeza que deseja sair?"),
+      actions: <Widget>[
+        cancelarButton,
+        continuarButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   Color corPrimaria = Color.fromRGBO(58, 66, 86, 1.0);
   @override
   Widget build(BuildContext context) {
@@ -38,45 +70,55 @@ class _OpcoesBuscaCineState extends State<OpcoesBuscaCine> {
       drawer: new Drawer(
         child: ListView(
           children: <Widget>[
-            UserAccountsDrawerHeader(
-              arrowColor: corPrimaria,
-              accountName: Text("Matheus Montanha"),
-              accountEmail: Text("matheusmontanhakk@gmail.com"),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage:
-                    NetworkImage("https://i.pravatar.cc/150?img=3"),
-              ),
-            ),
-            ListTile(
-              title: Text(
-                "Minha conta",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
+            Container(
+              color: corPrimaria,
+              child: DrawerHeader(
+                child: CircleAvatar(
+                  radius: 20,
+                  child: Text("BC"),
+                  // backgroundImage:
+                  //     NetworkImage("https://i.pravatar.cc/150?img=3"),
                 ),
               ),
             ),
-            Divider(
-              color: Colors.black,
-              height: 2.0,
-              indent: 15,
-              endIndent: 70,
-            ),
-            ListTile(
-              title: Text(
-                "Sair",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                ),
+            Container(
+              height: MediaQuery.of(context).size.height,
+              color: corPrimaria,
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    leading: Icon(
+                      Icons.account_box,
+                      size: 30,
+                      color: Colors.grey,
+                    ),
+                    title: Text(
+                      "Minha conta",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.exit_to_app,
+                      size: 30,
+                      color: Colors.grey,
+                    ),
+                    title: Text(
+                      "Sair",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                    onTap: () {
+                      alertDialogExit(context);
+                    },
+                  ),
+                ],
               ),
-              onTap: () {
-                sharedPreferences.clear();
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => LoginPage()),
-                    (Route<dynamic> route) => false);
-              },
             ),
           ],
         ),
