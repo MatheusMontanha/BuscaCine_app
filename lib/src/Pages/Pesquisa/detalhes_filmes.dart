@@ -7,6 +7,9 @@ class DetalhesFilme extends StatelessWidget {
   final Usaveis usaveis = Usaveis();
   DetalhesFilme(this.filme);
 
+  Color corPrimaria = Color.fromRGBO(58, 66, 86, 1.0);
+  Color corCards = Color.fromRGBO(64, 75, 96, .9);
+
   Image idenClassificacao(String classificacao) {
     switch (classificacao) {
       case "18 anos":
@@ -62,7 +65,7 @@ class DetalhesFilme extends StatelessWidget {
                     child: Text(
                       "Diretor: ${filme.director} \nDistribuição: ${filme.distributor}\nCidade: ${filme.city}",
                       style: TextStyle(
-                          color: Colors.white70, fontWeight: FontWeight.bold),
+                          color: Colors.white, fontWeight: FontWeight.bold),
                     ))),
             Expanded(flex: 1, child: classificacao)
           ],
@@ -75,6 +78,7 @@ class DetalhesFilme extends StatelessWidget {
         Container(
             padding: EdgeInsets.only(left: 10.0),
             height: MediaQuery.of(context).size.height * 0.5,
+            // height: MediaQuery.of(context).size.height,
             decoration: new BoxDecoration(
               image: new DecorationImage(
                 image: new NetworkImage(filme.images[0].url),
@@ -85,7 +89,9 @@ class DetalhesFilme extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.5,
           padding: EdgeInsets.all(40.0),
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(58, 66, 86, .7),
+          ),
           child: ListView(
             children: <Widget>[
               Center(
@@ -109,10 +115,11 @@ class DetalhesFilme extends StatelessWidget {
 
     final bottomContentText = Text(
       filme.synopsis,
-      style: TextStyle(fontSize: 18.0),
+      style: TextStyle(fontSize: 18.0, color: Colors.white),
     );
     final readButton = Container(
         height: 60,
+        width: 250,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
           color: Color(0xFF3C5A99),
@@ -123,10 +130,10 @@ class DetalhesFilme extends StatelessWidget {
         child: SizedBox.expand(
           child: FlatButton(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  "Assista ao trailer no Youtube",
+                  "Assista ao trailer",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -150,18 +157,26 @@ class DetalhesFilme extends StatelessWidget {
         ));
     final bottomContent = Container(
       width: MediaQuery.of(context).size.width,
+      //height: MediaQuery.of(context).size.height,
       padding: EdgeInsets.all(40.0),
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Text(
-              "Sinopse",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            bottomContentText,
-            readButton,
-          ],
-        ),
+      color: corCards,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            "Sinopse",
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          bottomContentText,
+          SizedBox(
+            height: 20,
+          ),
+          readButton,
+        ],
       ),
     );
 

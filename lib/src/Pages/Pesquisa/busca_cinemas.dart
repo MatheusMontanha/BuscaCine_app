@@ -10,7 +10,7 @@ class BuscaCinemas extends StatefulWidget {
 }
 
 class _BuscaCinemasState extends State<BuscaCinemas> {
-  Dio dio = new Dio();
+  Dio dio = Dio();
   List<PostModel> cinemasPorCidade = [];
   BuscaCineRequisicoes bcRequisicoes = BuscaCineRequisicoes();
 

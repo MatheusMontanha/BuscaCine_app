@@ -140,7 +140,9 @@ class _BuscaFilmeCartazState extends State<BuscaFilmeCartaz> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   subtitle: Text(
-                                    "Distribuidora: ${filmesEmCartaz[index].distributor}, Classificação ${filmesEmCartaz[index].contentRating}, Duração: ${filmesEmCartaz[index].duration}",
+                                    "Distribuidora: ${filmesEmCartaz[index].distributor}, "
+                                    "Classificação ${filmesEmCartaz[index].contentRating}, "
+                                    "Duração: ${filmesEmCartaz[index].duration} minutos",
                                     style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
