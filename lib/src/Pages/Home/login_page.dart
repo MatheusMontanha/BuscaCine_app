@@ -149,16 +149,9 @@ class _LoginPageState extends State<LoginPage> {
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      stops: [
-                        0.3,
-                        1
-                      ],
-                      colors: [
-                        Color(0xFF5F9EA0),
-                        Color(0xFF3C5A99),
-                      ]),
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
                   borderRadius: BorderRadius.all(
                     Radius.circular(5),
                   ),

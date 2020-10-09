@@ -124,16 +124,9 @@ class _SessoesCinemaState extends State<SessoesCinema> {
                                       color: Color(0xFF6A7288), width: 5.0)),
                               //borderRadius: BorderRadius.circular(5.0),
                               gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  stops: [
-                                    0.4,
-                                    1
-                                  ],
-                                  colors: [
-                                    Color(0xFF3A4256),
-                                    Color(0xFF6A7288),
-                                  ]),
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
                             ),
                             child: ListBody(
                               children: _salasDoFilme(index),
