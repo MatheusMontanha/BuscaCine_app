@@ -1,8 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/src/components/button_custom.dart';
+import 'package:flutter_app/src/components/buttons/large_button.dart';
 import 'package:flutter_app/src/feature_modules/home_page/opcoes_BuscaCine.dart';
 import 'package:flutter_app/src/models%20commun/post_token.dart';
+import 'package:flutter_app/src/outputs/JoyUiText.dart';
+import 'package:flutter_app/src/outputs/icons_custom.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EmailFieldValidator {
@@ -25,7 +29,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
   bool _isLogado = false;
   Dio dio = Dio();
 
@@ -196,41 +199,11 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 10,
               ),
-              Container(
-                height: 60,
-                alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(
-                  color: Color(0xFF3C5A99),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
-                ),
-                child: SizedBox.expand(
-                  child: FlatButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Login com Facebook",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                        Container(
-                          child: SizedBox(
-                            child: Image.asset("assets/fb-icon.png"),
-                            height: 28,
-                            width: 28,
-                          ),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
+              LargeButton(
+                color: Color(0xFF4267B2),
+                function: () {},
+                iconCustom: IconsCustom.fbicon,
+                text: JoyUiText.titleButtonLoginFacebook,
               ),
               SizedBox(
                 height: 10,
