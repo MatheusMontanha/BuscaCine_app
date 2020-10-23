@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/src/Models/post_model.dart';
-import 'package:flutter_app/src/Pages/Pesquisa/sessoes_cinema.dart';
-import 'package:flutter_app/src/app/Negocio/requests.dart';
+import 'package:flutter_app/src/feature_modules/search_cine/models/post_model.dart';
+import 'package:flutter_app/src/feature_modules/search_cine/widgets/sessoes_cinema.dart';
+import 'package:flutter_app/src/Connect_api/connect_api.dart';
 
 class BuscaCinemas extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class BuscaCinemas extends StatefulWidget {
 class _BuscaCinemasState extends State<BuscaCinemas> {
   Dio dio = Dio();
   List<PostModel> cinemasPorCidade = [];
-  BuscaCineRequisicoes bcRequisicoes = BuscaCineRequisicoes();
+  ConnectApi bcRequisicoes = ConnectApi();
 
   Future<List<PostModel>> _getCinemas(String nomeCidade) async {
     int id = await bcRequisicoes.recuperaIDCidade(nomeCidade);

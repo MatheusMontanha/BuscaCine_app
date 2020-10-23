@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/src/Models/post_token.dart';
-import 'package:flutter_app/src/Pages/Home/opcoes_BuscaCine.dart';
+import 'package:flutter_app/src/feature_modules/home_page/opcoes_BuscaCine.dart';
+import 'package:flutter_app/src/models%20commun/post_token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EmailFieldValidator {
@@ -147,15 +147,15 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 height: 60,
                 alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
-                ),
+                // decoration: BoxDecoration(
+                //   gradient: LinearGradient(
+                //     begin: Alignment.topLeft,
+                //     end: Alignment.bottomRight,
+                //   ),
+                //   borderRadius: BorderRadius.all(
+                //     Radius.circular(5),
+                //   ),
+                // ),
                 child: SizedBox.expand(
                   child: FlatButton(
                     child: Row(

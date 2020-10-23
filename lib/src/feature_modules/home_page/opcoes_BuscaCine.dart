@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/src/Pages/Home/login_page.dart';
-import 'package:flutter_app/src/Pages/Pesquisa/busca_cinemas.dart';
-import 'package:flutter_app/src/Pages/Pesquisa/busca_filmes_cartaz.dart';
+import 'package:flutter_app/src/feature_modules/search_cine/widgets/busca_cinemas.dart';
+import 'package:flutter_app/src/feature_modules/search_movie_poster/widgets/busca_filmes_cartaz.dart';
+import 'package:flutter_app/src/feature_modules/login/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OpcoesBuscaCine extends StatefulWidget {

@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_app/src/Models/post_cidade.dart';
-import 'package:flutter_app/src/Models/post_filmes_cartaz.dart';
-import 'package:flutter_app/src/Models/post_model.dart';
-import 'package:flutter_app/src/Models/post_sessoes_filme.dart';
+import 'package:flutter_app/src/feature_modules/search_movie_poster/models/post_filmes_cartaz.dart';
+import 'package:flutter_app/src/feature_modules/search_cine/models/post_model.dart';
+import 'package:flutter_app/src/feature_modules/search_movie_poster/models/post_sessoes_filme.dart';
+import 'package:flutter_app/src/models%20commun/post_cidade.dart';
 
-class BuscaCineRequisicoes {
+class ConnectApi {
   Dio dio = Dio();
   int id;
   List<PostModel> cinemasPorCidade;
@@ -59,7 +59,6 @@ class BuscaCineRequisicoes {
             images: null);
         cinemasPorCidade.add(postModel);
       }
-
       return cinemasPorCidade;
     }
   }

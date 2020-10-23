@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/src/Models/post_filmes_cartaz.dart';
-import 'package:flutter_app/src/Pages/Pesquisa/detalhes_filmes.dart';
-import 'package:flutter_app/src/app/Negocio/requests.dart';
+import 'package:flutter_app/src/feature_modules/search_movie_poster/models/post_filmes_cartaz.dart';
+import 'package:flutter_app/src/feature_modules/search_movie_poster/models/detalhes_filmes.dart';
+import 'package:flutter_app/src/Connect_api/connect_api.dart';
 
 class BuscaFilmeCartaz extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ var newTaskCtrl = TextEditingController();
 class _BuscaFilmeCartazState extends State<BuscaFilmeCartaz> {
   Dio dio = new Dio();
   List<PostFilmeCartaz> filmesEmCartaz = [];
-  BuscaCineRequisicoes bcRequisicoes = BuscaCineRequisicoes();
+  ConnectApi bcRequisicoes = ConnectApi();
 
   Future<List<PostFilmeCartaz>> _getFilmesCartaz(String nomeCidade) async {
     int id = await bcRequisicoes.recuperaIDCidade(nomeCidade);

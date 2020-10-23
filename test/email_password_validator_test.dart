@@ -1,4 +1,4 @@
-import 'package:flutter_app/src/Pages/Home/login_page.dart';
+import 'package:flutter_app/src/feature_modules/login/login_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/src/Models/post_model.dart';
-import 'package:flutter_app/src/Models/post_sessoes_filme.dart';
-import 'package:flutter_app/src/app/Negocio/requests.dart';
-import 'package:flutter_app/src/app/Negocio/comuns.dart';
+import 'package:flutter_app/src/Connect_api/connect_api.dart';
+import 'package:flutter_app/src/feature_modules/search_cine/models/post_model.dart';
+import 'package:flutter_app/src/feature_modules/search_movie_poster/models/post_sessoes_filme.dart';
+import 'package:flutter_app/src/utils/comuns.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
 class SessoesCinema extends StatefulWidget {
@@ -24,7 +24,7 @@ class _SessoesCinemaState extends State<SessoesCinema> {
 
   Dio dio = new Dio();
   Usaveis usaveis = Usaveis();
-  BuscaCineRequisicoes bcRequisicoes = BuscaCineRequisicoes();
+  ConnectApi bcRequisicoes = ConnectApi();
 
   Future<List<PostSessaoFilme>> _getSessoesCinema() async {
     sessoesPorCinema = await bcRequisicoes.recuperaSessoesCinema(
@@ -123,10 +123,10 @@ class _SessoesCinemaState extends State<SessoesCinema> {
                                   right: BorderSide(
                                       color: Color(0xFF6A7288), width: 5.0)),
                               //borderRadius: BorderRadius.circular(5.0),
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
+                              // gradient: LinearGradient(
+                              //   begin: Alignment.topLeft,
+                              //   end: Alignment.bottomRight,
+                              // ),
                             ),
                             child: ListBody(
                               children: _salasDoFilme(index),
