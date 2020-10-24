@@ -1,25 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_app/src/components/button_custom.dart';
 import 'package:flutter_app/src/components/buttons/large_button.dart';
+import 'package:flutter_app/src/components/buttons/large_text_field.dart';
 import 'package:flutter_app/src/feature_modules/home_page/opcoes_BuscaCine.dart';
 import 'package:flutter_app/src/models%20commun/post_token.dart';
 import 'package:flutter_app/src/outputs/JoyUiText.dart';
 import 'package:flutter_app/src/outputs/icons_custom.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-class EmailFieldValidator {
-  static String validate(String value) {
-    return value.isEmpty ? "O campo de email deve ser preenchido." : null;
-  }
-}
-
-class PasswordFieldValidator {
-  static String validate(String value) {
-    return value.isEmpty ? "O campo de senha deve ser preenchido." : null;
-  }
-}
 
 class LoginPage extends StatefulWidget {
   @override
@@ -30,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool _isLogado = false;
+  bool isUseNativeIcon;
   Dio dio = Dio();
 
   signIn(String email, String password) async {
@@ -76,54 +64,23 @@ class _LoginPageState extends State<LoginPage> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
-              SizedBox(
-                width: 128,
-                height: 128,
-                child: Image.asset("assets/pop-corn.png"),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: Image.asset(
+                  IconsCustom.popconricon,
+                  width: 128,
+                  height: 128,
+                ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
+              LargeTextField(
+                textController: emailController,
+                labelText: JoyUiText.labelEmailFone,
                 maxLength: 50,
-                maxLengthEnforced: true,
-                //initialValue: "eve.holt@reqres.in",
-                validator: EmailFieldValidator.validate,
-                controller: emailController,
-                decoration: InputDecoration(
-                  labelText: "Telefone ou E-mail",
-                  labelStyle: TextStyle(
-                    color: Colors.black38,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                ),
-                style: TextStyle(fontSize: 20),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                maxLength: 10,
-                maxLengthEnforced: true,
-                keyboardType: TextInputType.text,
-                validator: PasswordFieldValidator.validate,
-                obscureText: true,
-                //initialValue: "cityslicka",
-                controller: passwordController,
-                decoration: InputDecoration(
-                  labelText: "Senha",
-                  labelStyle: TextStyle(
-                    color: Colors.black38,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
+              LargeTextField(
+                  textController: passwordController,
+                  labelText: JoyUiText.labelPassword,
+                  maxLength: 10),
               Container(
                 height: 40,
                 child: FlatButton(
@@ -147,63 +104,29 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 40,
               ),
-              Container(
-                height: 60,
-                alignment: Alignment.centerLeft,
-                // decoration: BoxDecoration(
-                //   gradient: LinearGradient(
-                //     begin: Alignment.topLeft,
-                //     end: Alignment.bottomRight,
-                //   ),
-                //   borderRadius: BorderRadius.all(
-                //     Radius.circular(5),
-                //   ),
-                // ),
-                child: SizedBox.expand(
-                  child: FlatButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Login",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 22,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                        Container(
-                          child: SizedBox(
-                            child: Icon(
-                              Icons.assignment_ind,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                            height: 28,
-                            width: 28,
-                          ),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        snackBars(true);
-                        signIn(emailController.text, passwordController.text);
-                        snackBars(_isLogado);
-                      }
-                    },
-                  ),
-                ),
+              LargeButton(
+                Color(0xFF4267B2),
+                () {},
+                JoyUiText.labelLoginButton,
+                isUseNativeIcon = true,
+                Icons.assignment_ind,
               ),
               SizedBox(
                 height: 10,
               ),
               LargeButton(
-                color: Color(0xFF4267B2),
-                function: () {},
-                iconCustom: IconsCustom.fbicon,
-                text: JoyUiText.titleButtonLoginFacebook,
+                Color(0xFF4267B2),
+                () {
+                  if (_formKey.currentState.validate()) {
+                    snackBars(true);
+                    signIn(emailController.text, passwordController.text);
+                    snackBars(_isLogado);
+                  }
+                },
+                JoyUiText.titleButtonLoginFacebook,
+                isUseNativeIcon = false,
+                null,
+                IconsCustom.fbicon,
               ),
               SizedBox(
                 height: 10,
@@ -237,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
 
   conteudosnackBars(bool value) {
     if (!value) {
-      return new Row(children: <Widget>[
+      return Row(children: <Widget>[
         Text(
           "Email ou senha incorretos!",
           style: TextStyle(fontWeight: FontWeight.bold),

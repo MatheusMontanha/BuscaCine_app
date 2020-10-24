@@ -5,11 +5,10 @@ class LargeButton extends StatelessWidget {
   final String iconCustom;
   final Function function;
   final String text;
-  LargeButton(
-      {@required this.color,
-      @required this.iconCustom,
-      @required this.function,
-      @required this.text});
+  final bool isUseCustomIcon;
+  final IconData iconNative;
+  LargeButton(this.color, this.function, this.text, this.isUseCustomIcon,
+      [this.iconNative, this.iconCustom]);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +36,9 @@ class LargeButton extends StatelessWidget {
               ),
               Container(
                 child: SizedBox(
-                  child: Image.asset(iconCustom),
+                  child: isUseCustomIcon
+                      ? Icon(iconNative)
+                      : Image.asset(iconCustom),
                   height: 28,
                   width: 28,
                 ),
